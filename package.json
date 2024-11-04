@@ -4,8 +4,11 @@
   "description": "cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-   
+    "install": "cypress install",
+    "test": "cypress run",
+    "start": "cypress open",
+    "screenshot": "cypress run --spec 'cypress/e2e/CaptureScreenshot.cy.js'",
+    "run-cypress": "node runCypress.js"
   },
   "author": "Hari",
   "license": "ISC",
