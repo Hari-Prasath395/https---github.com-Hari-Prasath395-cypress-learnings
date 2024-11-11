@@ -1,3 +1,6 @@
+import "cypress-iframe";
+require('@4tw/cypress-drag-drop')
+
 describe("Mouse Operations", () => {
   it("Mosue Hover", () => {
     cy.visit("https://demo.opencart.com/");
@@ -10,7 +13,7 @@ describe("Mouse Operations", () => {
     ).should("be.visible");
   });
 
-  it.only("Right Click", () => {
+  it("Right Click", () => {
     cy.visit("https://www.softwaretestingmentor.com/automation-practice-page-right-click-demo/");
     
     // Trigger the right-click action
@@ -26,8 +29,32 @@ describe("Mouse Operations", () => {
 });
 
 
-  it("Double Click", () => {});
-  it("Drag and Drop using plugin", () => {});
+describe("Handling Frames", () => {
+  it("Double Click", () => {
+      cy.visit("https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_ev_ondblclick3");
 
-  it("Scrolling Page", () => {});
+      cy.frameLoaded("#iframeResult"); // Load the frame
+
+      // Using trigger() for double-click
+      cy.iframe("#iframeResult").find("button[ondblclick='myFunction()']").trigger("dblclick");
+      cy.iframe("#iframeResult").find("#field2").should("have.value", "Hello World!");
+
+      //Using Double click 
+
+      // cy.iframe("#iframeResult").find("button[ondblclick='myFunction()']").dblclick();
+      // cy.iframe("#iframeResult").find("#field2").should("have.value", "Hello World!");
+
+  });
+});
+
+it.only("Drag and Drop using cypress plugin", () => {
+  cy.visit("http://www.dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html");
+
+  // Using the drag-drop plugin to drag #box6 to #box106
+  cy.get("#box6").drag("#box106", { force: true });
+});
+
+  it("Scrolling Page", () => {
+
+  });
 });
